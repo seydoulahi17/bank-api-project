@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://bankapi.com/soap"
+                  targetNamespace="http://bankapi.com/soap">
+
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://bankapi.com/soap">
+            <xs:element name="getBalanceRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="accountId" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getBalanceResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="balance" type="xs:decimal"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="getTransactionsRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="accountId" type="xs:string"/>
+                        <xs:element name="pageNumber" type="xs:int"/>
+                        <xs:element name="pageSize" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getTransactionsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="transaction" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="transactionId" type="xs:string"/>
+                                    <xs:element name="amount" type="xs:decimal"/>
+                                    <xs:element name="timestamp" type="xs:dateTime"/>
+                                    <xs:element name="description" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            
+            <xs:element name="transferFundsRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="fromAccountId" type="xs:string"/>
+                        <xs:element name="toAccountId" type="xs:string"/>
+                        <xs:element name="amount" type="xs:decimal"/>
+                        <xs:element name="currency" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="transferFundsResponse">
+                <xs:complexType>
